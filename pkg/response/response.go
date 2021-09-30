@@ -24,3 +24,8 @@ func BadRequest(rw http.ResponseWriter) {
 func InternalServer(rw http.ResponseWriter) {
 	HttpError(rw, "bad request", 500)
 }
+
+func Ok(rw http.ResponseWriter, content []byte) {
+	rw.Write(content)
+	rw.WriteHeader(200)
+}
