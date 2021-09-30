@@ -48,6 +48,12 @@ func buildParamsFromValues(values url.Values) (params, error) {
 		return p, err
 	}
 
+	// number being a multiple of int1 and int2
+	if p.int1 == p.int2 {
+		p.inter = p.int1
+	} else {
+		p.inter = p.int1 * p.int2
+	}
 	return p, nil
 }
 
@@ -78,8 +84,6 @@ func FizzBuzzTestHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	// case of given number is equal int1 and int2
-	params.inter = params.int1 * params.int2
 	// setup response writer buffer
 	resBuff := bytes.Buffer{}
 
@@ -87,6 +91,6 @@ func FizzBuzzTestHandler(w http.ResponseWriter, req *http.Request) {
 		resBuff.WriteString(findOutToken(params, i) + ",")
 	}
 
-	// triming trailing "," before giving responseq
+	// triming trailing "," before giving response
 	response.Ok(w, bytes.Trim(resBuff.Bytes(), ","))
 }

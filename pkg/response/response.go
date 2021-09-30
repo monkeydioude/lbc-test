@@ -27,5 +27,4 @@ func InternalServer(rw http.ResponseWriter) {
 
 func Ok(rw http.ResponseWriter, content []byte) {
 	rw.Write(content)
-	rw.WriteHeader(200)
 }
