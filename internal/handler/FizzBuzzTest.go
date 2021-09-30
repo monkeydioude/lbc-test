@@ -75,22 +75,29 @@ func findOutToken(p params, num int) string {
 	return strconv.Itoa(num)
 }
 
+// computeResponse build a response by running the main algorithm
+// through every int from 1 to limit
+func computeResponse(p params) []byte {
+	// setup response writer buffer
+	resBuff := bytes.Buffer{}
+
+	for i := 1; i <= p.limit; i++ {
+		resBuff.WriteString(findOutToken(p, i) + ",")
+	}
+
+	// triming trailing "," before giving response back
+	return bytes.Trim(resBuff.Bytes(), ",")
+}
+
 // FizzBuzzTestHandler is the handler for the route /fizz-buzz/test
 func FizzBuzzTestHandler(w http.ResponseWriter, req *http.Request) {
 	// building mandatory params struct from query string values
 	params, err := buildParamsFromValues(req.URL.Query())
+
 	if err != nil {
 		response.BadRequest(w)
 		return
 	}
 
-	// setup response writer buffer
-	resBuff := bytes.Buffer{}
-
-	for i := 1; i <= params.limit; i++ {
-		resBuff.WriteString(findOutToken(params, i) + ",")
-	}
-
-	// triming trailing "," before giving response
-	response.Ok(w, bytes.Trim(resBuff.Bytes(), ","))
+	response.Ok(w, computeResponse(params))
 }
