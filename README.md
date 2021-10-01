@@ -2,11 +2,28 @@
 
 [![Build Status](https://api.travis-ci.com/monkeydioude/lbc-test.svg?branch=master)](https://app.travis-ci.com/github/monkeydioude/lbc-test)
 
-This REST API exposes, for now, 1 out of 2 endpoints:
-- POST /fizz-buzz/test
+This REST API exposes 2 endpoints:
+- POST /fizz-buzz
+- GET /fizz-buzz/stats
 
 
-Details of the test:
+### POST /fizz-buzz
+Takes 5 query parameters:
+- int1
+- int2
+- limit
+- str1
+- str2
+
+Core endpoint of the test. For details see below.
+
+### GET /fizz-buzz/stats
+Takes no parameter.
+
+Display query parameters and number of hits of the most used request to POST /fizz-buzz.
+
+
+### Details of the test:
 
 ```
 Exercise: Write a simple fizz-buzz REST server.
@@ -15,8 +32,8 @@ Exercise: Write a simple fizz-buzz REST server.
 The output would look like this: ""1,2,fizz,4,buzz,fizz,7,8,fizz,buzz,11,fizz,13,14,fizzbuzz,16,...""."
 
 Your goal is to implement a web server that will expose a REST API endpoint that:
-- Accepts five parameters: three integers int1, int2 and limit, and two strings str1 and str2.
-- Returns a list of strings with numbers from 1 to limit, where: all multiples of int1 are replaced by str1, all multiples of int2 are replaced by str2, all multiples of int1 and int2 are replaced by str1str2.
+- Accepts five parameters: three integers Int1, Int2 and Limit, and two strings Str1 and Str2.
+- Returns a list of strings with numbers from 1 to Limit, where: all multiples of Int1 are replaced by Str1, all multiples of Int2 are replaced by Str2, all multiples of Int1 and Int2 are replaced by Str1Str2.
 
 The server needs to be:
 - Ready for production

@@ -1,13 +1,15 @@
 package router
 
 import (
+	"log"
+
 	"github.com/monkeydioude/lbc-test/pkg/response"
 
 	"net/http"
 )
 
 // Router's struct is made to implement http.Handler's
-// interface while providing a simple "routing" API
+// Interface while providing a simple "routing" API
 // using the flexibility of http.HandlerFunc type
 type Router struct {
 	handlers map[string]map[string]http.HandlerFunc
@@ -16,7 +18,7 @@ type Router struct {
 // New returns a instance of a Router struct.
 // Even so this will most likely be stored on the heap because of the map,
 // considering the fact that this struct is going to be used almost always
-// in main func, there is no reason to return a pointer.
+// in main func, there is no need to return a poInter.
 func New() Router {
 	return Router{
 		handlers: make(map[string]map[string]http.HandlerFunc),
@@ -29,6 +31,7 @@ func (r Router) AddRoute(method string, path string, handler http.HandlerFunc) {
 		r.handlers[method] = make(map[string]http.HandlerFunc)
 	}
 	r.handlers[method][path] = handler
+	log.Printf("[INFO] routing %s %s", method, path)
 }
 
 // Get is a wrapper around AddRoute forcing a GET HTTP method onto a path
@@ -43,7 +46,7 @@ func (r Router) Post(path string, handler http.HandlerFunc) {
 	r.AddRoute("POST", path, handler)
 }
 
-// ServeHTTP implements http.Handler interface while being the core
+// ServeHTTP implements http.Handler Interface while being the core
 // this "routing" API
 func (r Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	if _, ok := r.handlers[req.Method]; !ok {

@@ -22,7 +22,7 @@ func BadRequest(rw http.ResponseWriter) {
 
 // InternalServer wrapper of a wrapper forcing 500 response code
 func InternalServer(rw http.ResponseWriter) {
-	HttpError(rw, "bad request", 500)
+	HttpError(rw, "internal server", 500)
 }
 
 func Ok(rw http.ResponseWriter, content []byte) {

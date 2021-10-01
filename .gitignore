@@ -1,2 +1,3 @@
 .vscode
 cmd/lbc-test/lbc-test
+cmd/lbc-test/*.db
