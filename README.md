@@ -15,6 +15,8 @@ Takes 5 query parameters:
 - str1
 - str2
 
+ex: /fizz-buzz?int1=2&int2=3&limit=10&str1=a&str2=b
+
 Core endpoint of the test. For details see below.
 
 ### GET /fizz-buzz/stats

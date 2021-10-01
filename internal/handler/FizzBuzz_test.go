@@ -23,7 +23,7 @@ func TestICanReturnACorrectResponseOn2PositiveIntAndPositiveLimit(t *testing.T) 
 }
 
 func TestICanFailOnMissingParameters(t *testing.T) {
-	reqtest := httptest.NewRequest("POST", "http://localhost:8004/fizz-buzz/test?Int1=1&Str1=a&Str2=b&Limit=2", nil)
+	reqtest := httptest.NewRequest("POST", "http://localhost:8004/fizz-buzz?int1=1&str1=a&str2=b&limit=2", nil)
 	_, err := buildParamsFromValues(reqtest.URL.Query())
 
 	if err == nil {
@@ -32,7 +32,7 @@ func TestICanFailOnMissingParameters(t *testing.T) {
 }
 
 func TestICanFailOnUnwantedIntValues(t *testing.T) {
-	reqtest := httptest.NewRequest("POST", "http://localhost:8004/fizz-buzz/test?Int1=1&Int2=2&Limit=a&Str1=a&Str2=b", nil)
+	reqtest := httptest.NewRequest("POST", "http://localhost:8004/fizz-buzz?int1=1&int2=2&Llimit=a&str1=a&str2=b", nil)
 	_, err := buildParamsFromValues(reqtest.URL.Query())
 
 	if err == nil {
@@ -134,7 +134,7 @@ func TestInt1AndInt2AreNegatives(t *testing.T) {
 
 func TestICanComputeInterIsEqualToInt1IfInt1EqualsInt2(t *testing.T) {
 	// Int1 and Int2 must be same for this test
-	reqtest := httptest.NewRequest("POST", "http://localhost:8004/fizz-buzz/test?int1=2&int2=2&limit=2&str1=a&str2=b", nil)
+	reqtest := httptest.NewRequest("POST", "http://localhost:8004/fizz-buzz?int1=2&int2=2&limit=2&str1=a&str2=b", nil)
 	p, err := buildParamsFromValues(reqtest.URL.Query())
 
 	if err != nil || p.Limit != 2 {
