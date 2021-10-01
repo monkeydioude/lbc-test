@@ -134,7 +134,7 @@ func TestInt1AndInt2AreNegatives(t *testing.T) {
 
 func TestICanComputeInterIsEqualToInt1IfInt1EqualsInt2(t *testing.T) {
 	// Int1 and Int2 must be same for this test
-	reqtest := httptest.NewRequest("POST", "http://localhost:8004/fizz-buzz/test?Int1=2&Int2=2&Limit=2&Str1=a&Str2=b", nil)
+	reqtest := httptest.NewRequest("POST", "http://localhost:8004/fizz-buzz/test?int1=2&int2=2&limit=2&str1=a&str2=b", nil)
 	p, err := buildParamsFromValues(reqtest.URL.Query())
 
 	if err != nil || p.Limit != 2 {
